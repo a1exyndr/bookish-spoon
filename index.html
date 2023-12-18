@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!--Кодировка-->
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <!--Кодировка-->
+        <title>Журнал оценок </title>
+        <link rel="stylesheet" href="styles.css">
+        <!--Иконка-->
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="icon" href="favicon.ico">
+        <!--Иконка-->
+        <!--Google Visualization-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&family=Raleway:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+        <script src="https://www.google.com/jsapi"></script>
+        <script>
+            google.load("visualization", "1", {packages:["corechart"]});
+            google.setOnLoadCallback(drawChart);
+        </script>
+        <script>
+            google.load("visualization", "1", {packages:["corechart"]});
+            google.setOnLoadCallback(drawColumnChart);
+        </script>
+        <!--Google Visualization-->
+    </head>
+    <body>
+        <div class="content">
+            <h1 class="PageTitle">Добро пожаловать на страницу успеваемости групп АБ!</h1>
+            <!--Табы-->
+            <div class="container">
+                <div class="tab">
+                    <div class="tab-content" id="content-1">
+                    Для загрузки оценок используйте файл с расширениями .cvs .txt и .xlsx
+                    <br>
+                    <input type="file" accept=".csv, .xlsx, .txt" onchange="dowFile(this) " >
+                    </div>
+                    <div class="tab-content" id="content-2" >
+                        <h2>На этой странице вы можете создать или отредактировать журнал</h2>
+                        <div id="formContainer"> 
+                            <label for="surnameInput"> 
+                                Фамилия: 
+                            </label> 
+                            <input type="text"
+                                id="surnameInput"
+                                placeholder="Введите фамилию"> 
+                            <label for="groupInput"> 
+                                Группа: 
+                            </label> 
+                            <input type="tex"
+                                id="groupInput"
+                                placeholder="Введите группу"> 
+                            <label for="InformaticsInput"> 
+                                Информатика: 
+                            </label> 
+                            <input type="text"
+                                id="InformaticsInput"
+                                placeholder="Введите оценку по информатике"> 
+                            <label for="physicsInput"> 
+                                Физика: 
+                            </label> 
+                            <input id="physicsInput"
+                                placeholder="Введите оценку по физике"> 
+                            </input>
+                             <label for="mathemathicsInput"> 
+                                Математика: 
+                            </label> 
+                            <input type="text"
+                                id="mathemathicsInput"
+                                placeholder="Введите оценку по математике">
+                            <label for="literatureInput"> 
+                                Литература: 
+                            </label> 
+                            <input type="text"
+                                id="literatureInput"
+                                placeholder="Введите оценку по литературе">
+                            <label for="musicInput"> 
+                                Музыка: 
+                            </label> 
+                            <input type="text"
+                                id="musicInput"
+                                placeholder="Введите оценку по музыке">
+                            <button onclick="addData()"> 
+                                Добавить 
+                            </button> 
+                        </div> 
+                        <table id="outputTable"> 
+                            <tr> 
+                                <th>ФИО</th> 
+                                <th>Группа</th> 
+                                <th>Информатика</th> 
+                                <th>Физика</th>
+                                <th>Математика</th>
+                                <th>Литература</th>
+                                <th>Музыка</th>
+                                <th>Действие</th> 
+                            </tr> 
+                        </table> 
+                        <a href="#" onclick="downloadTable()">Скачать таблицу</a>
+                    </div>
+                    <div class="tab-content" id="content-3">
+                    Для отображения информации загрузите файл.
+                    </div>
+                     <div class="tab-content" id="content-4">
+                    Для отображения информации загрузите файл.
+                    </div>
+                    <div class="tab-content" id="content-5">
+                        <h2>Диаграмма по предметам</h2>
+                        <div id="myChart" style="width: 900px; height: 500px;"></div>
+                    </div>
+                    <div class="tab-content" id="content-6">
+                    <h2>Помощь</h2>
+                    <h3>1. Для загрузки сформированного журнала и его последующего отображения:</h3>
+                    <p>1) Перейдите во вкладку "Загрузка журнала". <br>2) Нажмите на кнопку "Выберите файл" (Обращаем ваше внимание, что для загрузки принимаются файлы только с расширениями .csv .txt .xlsx). <br> 3) Загруженный файл отобразится на той же странице в виде таблицы.</p>
+                    <h3>2. Для создания и/или редактирования журнала:</h3>
+                    <p>1) Перейдите во вкладку "Создание или редактирование журнала" <br>2) Если вы загрузили журнал на предыдущем шаге, то отобразится таблица с имеющимися данными. <br> 3) Для добавления записи в журнал введите данные в текстовые поля и нажмите на кнопку "Добавить", в конец таблицы встроится строка с введенными данными. <br> 4) Для редактирования информации нажмите на кнопку "Редактировать" в соответствующей строке. В появившемся окне введите информацию, которую хотите изменить и нажмите на кнопку "Продолжить". Последовательно вводите изменения в следующие текстовые поля. Если изменять данные не нужно, также нажмите "Продолжить". Кнопка "Отмена" очистит ячейку таблицы. <br> 5) Если вам нужно удалить данные об ученике, нажмите на кнопку "Удалить". Данная операция исключает строку из таблицы. <br> 6) Для сохранения журнала нажмите на кнопку "Скачать таблицу". Журнал будет загружен в форматах .csv .txt и .html. Ваш браузер запросит разрешение на загрузку нескольких файлов, нажмите "Разрешить".</p>
+                    <h3>3. Для просмотра статистики по студентам:</h3>
+                    <p>1) Перейдите во вкладку "Статистика в табличном виде по студентам". <br> 2) Отобразится таблица с фамилией студента, средним баллом, медианой, количеством оценок, процентом учеников для каждой оценки.</p>
+                    <h3>4. Для просмотра статистики по группам:</h3>
+                    <p>1) Перейдите во вкладку "Статистика в табличном виде по группам". <br> 2) Отобразится таблица по каждому предмету с группой, средней оценкой, медианой, количеством и процентом учеников для каждой оценки</p>
+                    <h3>5. Для просмотра статистики в графическом виде:</h3>
+                    <p>1) Нажмите на вкладку "Статистика в графическом виде" <br> 2) Отобразится статистика в виде круговой диаграммы.</p>
+                    </div>
+                    <div class="tab-content" id="content-7">
+                    <h2>Информация о разработчике</h2>
+                    <img src="developer.jpg " style="width: 300px; height: 400px;">
+                    <p>Воропаев Александр Дмитриевич</p>
+                    <a href="https://vk.com/si6er1an">ВКонтакте</a>
+                    </div>
+                    <div class="tab-nav">
+                    <input checked id="tab-btn-1" name="tab-btn" type="radio" value="">
+                    <label for="tab-btn-1">Загрузка журнала</label>
+                    <input id="tab-btn-2" name="tab-btn" type="radio" value="">
+                    <label for="tab-btn-2">Создание или редактирование журнала</label>
+                    <input id="tab-btn-3" name="tab-btn" type="radio" value="">
+                    <label for="tab-btn-3">Статистика в табличном виде по студентам</label>
+                    <input id="tab-btn-4" name="tab-btn" type="radio" value="">
+                    <label for="tab-btn-4">Статистика в табличном виде по группам</label>
+                    <input id="tab-btn-5" name="tab-btn" type="radio" value="">
+                    <label for="tab-btn-5">Статистика в графическом виде</label>
+                    <input id="tab-btn-6" name="tab-btn" type="radio" value="">
+                    <label for="tab-btn-6">Помощь</label>
+                    <input id="tab-btn-7" name="tab-btn" type="radio" value="">
+                    <label for="tab-btn-7">О разработчике</label>
+                    </div>
+                </div>
+            </div>
+            <!--Табы-->
+        </div>
+    </body>
+    <footer>
+        <script src="https://code.highcharts.com/highcharts.js "></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+        <script type="application/javascript"  charset="utf-8" src="script.js"></script>
+    </footer>
+</html>

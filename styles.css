@@ -1,0 +1,157 @@
+body {
+    margin: 4rem; 
+    background: cornsilk url("background.jpg") ;
+    background-attachment: fixed;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.content {
+    width: 90%;
+    margin: 70px auto 0 auto;
+    background-color: #4682B4;
+    min-height: calc(100vh - 200px);
+    padding: 20px;
+}
+
+.PageTitle {
+    font-size: 34px;
+    color: #ffffff;
+    text-align: center;
+    text-indent: 20px;
+}
+
+/*Табы*/
+.container {
+    margin: 1rem;
+    padding: 1.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+}
+
+.tab {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.tab-nav > input[type="radio"] {
+    display: none;
+}
+
+.tab-content {
+    display: none;
+}
+
+#content-1:has(~ .tab-nav > #tab-btn-1:checked),
+#content-2:has(~ .tab-nav > #tab-btn-2:checked),
+#content-3:has(~ .tab-nav > #tab-btn-3:checked),
+#content-4:has(~ .tab-nav > #tab-btn-4:checked),
+#content-5:has(~ .tab-nav > #tab-btn-5:checked),
+#content-6:has(~ .tab-nav > #tab-btn-6:checked),
+#content-7:has(~ .tab-nav > #tab-btn-7:checked) {
+    display: block;
+    color: #ffffff;
+}
+
+.tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+    order: -1;
+}
+
+.tab-nav > label {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    background: 0 0;
+    border: 1px solid transparent;
+    margin-bottom: -1px;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    -webkit-appearance: button;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.tab-nav > input[type="radio"]:checked + label {
+    color: #000;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    cursor: default;
+}
+/*Табы*/
+
+/*Таблицы*/
+td {
+    border: 2px solid #000000;
+    padding: 10px;
+    font-size: 15px;
+}
+
+hr {
+    border: none;
+    color:black;
+    background-color: black;
+    height: 3px;
+}
+
+table { 
+    border-collapse: collapse; 
+    margin-bottom: 20px; 
+    width: 100%; 
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+} 
+
+th, 
+td { 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
+} 
+  
+th { 
+    background-color: #102c54; 
+    color: #fff; 
+}
+
+label { 
+    display: block; 
+    margin-top: 10px; 
+} 
+
+input { 
+    width: 300px; 
+    padding: 8px; 
+    margin-top: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+} 
+
+button { 
+    margin: 10px; 
+    padding: 8px 16px; 
+    background-color: #102c54; 
+    color: #fff; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+}
+
+button:hover { 
+    background-color: #063971; 
+}  
+
+#formContainer { 
+    margin-bottom: 20px; 
+} 
+/*Таблицы*/
